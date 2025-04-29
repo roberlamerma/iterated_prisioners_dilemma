@@ -4,17 +4,16 @@
 
 This project is a personal exploration driven by two main goals:
 
-*   To delve deeper into the fascinating **Iterated Prisoner's Dilemma (IPD)** problem, Game Theory concepts, and Nash equilibria.
-*   To learn the **Rust** programming language by applying it to this interesting problem domain.
-
-This is primarily a learning exercise and a way to satisfy personal curiosity about game theory simulations.
+*   To delve deeper into the fascinating **Iterated [Prisoner's Dilemma](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma) (IPD)** problem and some related Game Theory concepts such as Nash equilibria.
+*   To learn **Rust** "by doing". **Disclaimer:** I received a lot of help from the AI's mentioned below. 
 
 ## Built With
 
 *   [Rust](https://www.rust-lang.org/) (Programming Language)
 *   [rand](https://crates.io/crates/rand) (For strategies involving randomness)
-*   [csv](https://crates.io/crates/csv) (For saving simulation results)
-    *   *(Add any other significant libraries used, e.g., `clap` for command-line parsing)*
+*   [clap](https://crates.io/crates/clap) (For command line parsing)
+*   [chrono](https://crates.io/crates/chrono) (For manipulating date/times)
+*   **std** For everything else!
 
 ## Getting Started
 
@@ -33,8 +32,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 1.  Clone the repository:
     ```bash
-    mkdir <your_project_directory>
-    cd <your_project_directory>
+    mkdir <YOUR_PROJECT_DIR>
+    cd <YOUR_PROJECT_DIR>
     git clone https://github.com/roberlamerma/iterated_prisioners_dilemma.git
     ```
 2.  Build the project:
@@ -48,25 +47,41 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ## Usage
 
-**Example using `cargo run`:**
+You basically need to provide the 2 competing strategies (`--strategy1` and `--strategy2`), and how many times they will "play" against each other (`--iterations`)
+
+### Using `cargo run`
 
 ```bash
-# Replace <strategy1>, <strategy2>, and <num_iterations> with actual values supported by the program
-# e.g., TitForTat, AlwaysCooperate, AlwaysDefect, Random, etc.
-cargo run -- --verbose --iterations 100 --strategy1 random --strategy2 titfortat
+cargo run -- --verbose --iterations 100 --strategy1 Random --strategy2 TitForTat
 ```
 
-**Example using the compiled release executable:**
+### Using the compiled release executable
 
 ```bash
 # After building with `cargo build --release`
-./target/debug/ipd-simulator --verbose --iterations 100 --strategy1 random --strategy2 titfortat
+./target/debug/ipd-simulator --verbose --iterations 100 --strategy1 Random --strategy2 TitForTat
+```
+### List all available strategies
+
+As of Today, the easiest way to do this is to check the `create_strategy` function, in the `main.rs` file.
+
+*(Note: I'm planning to add a command line option for this. It will also provide a short description for each one)*
+
+```
+Random
+TitForTat
+SuspiciousTitForTat
+TitForTwoTats
+Gradual
+AlwaysDefect
+AlwaysCooperate
+Defect
 ```
 
-*(Note: Check the `--help` for all the possibilities.)*
-
-Simulation results, including scores and potentially move histories, are saved to a CSV file in the specified output location:
-`./target/debug/ipd-simulator --verbose --iterations 100 --strategy1 random --strategy2 titfortat --raw-scores-folder SOME_FOLDER`
+### Others 
+- Check the `--help` for all the possibilities.)
+- Simulation results, including scores and move histories can be saved to a CSV file:
+`./target/debug/ipd-simulator --verbose --iterations 100 --strategy1 Random --strategy2 TitForTat --raw-scores-folder <SOME_FOLDER>`
 
 ## Roadmap
 
@@ -74,6 +89,7 @@ Simulation results, including scores and potentially move histories, are saved t
 -   [x] Save simulation results as CSV files.
 -   [ ] Add pre-built executables to this README, in order to avoid building the project.
 -   [ ] Make a better/smarter registration of the strategies.
+-   [ ] List all strategies, and provide a description
 -   [ ] Implement all remaining known strategies (e.g., Pavlov, Grim Trigger variants, etc.).
 -   [ ] Implement an "all against all" tournament option.
 -   [ ] Run the "all against all" simulations concurrently (multi-threaded).
@@ -86,4 +102,4 @@ Simulation results, including scores and potentially move histories, are saved t
     *   DeepSeek
     *   GitHub Copilot
 *   **Inspiration:**
-    *   This fascinating Veritasium video which sparked further interest: [What Game Theory Reveals About Life, The Universe, and Everything](https://www.youtube.com/watch?v=mScpHTIi-kM)
+    *   This fascinating Veritasium video sparked further interest: [What Game Theory Reveals About Life, The Universe, and Everything](https://www.youtube.com/watch?v=mScpHTIi-kM)
