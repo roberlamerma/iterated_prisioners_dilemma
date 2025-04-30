@@ -1,4 +1,4 @@
-name: Rust
+name: Build Rust binaries
 
 on:
   push:
@@ -10,13 +10,56 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
+  build-linux:
+    name: Build on Linux
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Linux Binary
+        run: cargo build --release
+
+      - name: Upload Linux Binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: ipd-linux
+          path: target/release/ipd-simulator
+
+  build-windows:
+    name: Build on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Windows Binary
+        run: cargo build --release
+
+      - name: Upload Windows Binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: ipd-windows
+          path: target/release/ipd-simulator.exe
+
+  build-macos:
+    name: Build on macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build macOS Binary
+        run: cargo build --release
+
+      - name: Upload macOS Binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: ipd-macos
+          path: target/release/ipd-simulator
