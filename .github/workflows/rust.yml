@@ -1,65 +1,43 @@
-name: Build Rust binaries
+name: Build Binaries
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build-linux:
-    name: Build on Linux
-    runs-on: ubuntu-latest
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+          - target: x86_64-apple-darwin
+            os: macos-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
 
-      - name: Build Linux Binary
-        run: cargo build --release
+      - name: Build
+        run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Upload Linux Binary
+      - name: Upload binary
         uses: actions/upload-artifact@v3
         with:
-          name: ipd-linux
-          path: target/release/ipd-simulator
+          name: ipd-simulator-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/ipd-simulator${{ matrix.os == 'windows-latest' && '.exe' || '' }}
 
-  build-windows:
-    name: Build on Windows
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Build Windows Binary
-        run: cargo build --release
-
-      - name: Upload Windows Binary
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipd-windows
-          path: target/release/ipd-simulator.exe
-
-  build-macos:
-    name: Build on macOS
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Build macOS Binary
-        run: cargo build --release
-
-      - name: Upload macOS Binary
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipd-macos
-          path: target/release/ipd-simulator
