@@ -23,7 +23,7 @@ jobs:
     - name: Run tests (Linux)
       run: cargo test --verbose
     - name: Upload Linux Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: linux-artifact
         path: target/release/ipd-simulator
@@ -40,7 +40,7 @@ jobs:
     - name: Run tests (Windows)
       run: cargo test --verbose
     - name: Upload Windows Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: windows-artifact
         path: target/release/ipd-simulator.exe
@@ -57,7 +57,7 @@ jobs:
     - name: Run tests (macOS)
       run: cargo test --verbose
     - name: Upload macOS Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: macos-artifact
         path: target/release/ipd-simulator
