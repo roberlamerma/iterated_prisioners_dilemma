@@ -1,13 +1,13 @@
 # Iterated Prisoner's Dilemma in Rust
 
-## About The Project
+## 1.- About The Project
 
 This project is a personal exploration driven by two main goals:
 
 *   To delve deeper into the fascinating **Iterated [Prisoner's Dilemma](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma) (IPD)** problem and some related Game Theory concepts such as Nash equilibria.
 *   To learn **Rust** "by doing". **Disclaimer:** I received a lot of help from the AI's mentioned further below. 
 
-## Built With
+## 2.- Built With
 
 *   [Rust](https://www.rust-lang.org/) (Programming Language)
 *   [rand](https://crates.io/crates/rand) (library used on strategies involving randomness)
@@ -15,11 +15,12 @@ This project is a personal exploration driven by two main goals:
 *   [chrono](https://crates.io/crates/chrono) (library for or manipulating date/times)
 *   **std** Rust's superb standard library, used for everything else!
 
-## Getting Started
+## 3.- Getting Started
+* If you just want to play with the simulator, download the [latest version](https://github.com/roberlamerma/iterated_prisioners_dilemma/releases/tag/v0.1.0), unzip it and jump to the [3.2.- Usage](https://github.com/roberlamerma/iterated_prisioners_dilemma/edit/master/README.md#32--usage) section. 
+* On the other hand, if you want to build the project yourself, keep reading...
 
-Follow these steps to get a local copy up and running.
-
-### Prerequisites
+### 3.1.- Build it
+#### Prerequisites
 
 Ensure you have the Rust toolchain installed. If not, follow the instructions on the [official Rust website](https://www.rust-lang.org/tools/install). This typically involves installing `rustup`.
 
@@ -28,7 +29,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # Follow the on-screen instructions
 ```
 
-### Build
+#### Build
 
 1.  Clone the repository:
     ```bash
@@ -44,24 +45,17 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     cargo build --release
     ```
 
-## Usage
+### 3.2.- Usage
 
-You basically need to provide the 2 competing strategies (`--strategy1` and `--strategy2`), and how many times they will "play" against each other (`--iterations`)
+You basically need to provide the program with 2 competing strategies (`--strategy1` and `--strategy2`), and how many times they will "play" against each other (`--iterations`)
 
-### Using `cargo run`
-
-```bash
-cargo run -- --verbose --iterations 100 --strategy1 Random --strategy2 TitForTat
-```
-
-### Using the compiled release executable
+#### Using the compiled release executable
 
 ```bash
-# After building with `cargo build --release`
-cd target/release
 ./ipd-simulator --verbose --iterations 100 --strategy1 Random --strategy2 TitForTat
 ```
-### List all available strategies
+
+#### List all available strategies
 
 As of Today, the easiest way to do this is to check the `create_strategy` function, in the `main.rs` file.
 
@@ -75,26 +69,26 @@ TitForTwoTats
 Gradual
 AlwaysDefect
 AlwaysCooperate
-Defect
+Tester
 ```
 
-### Misc 
-- Check the `--help` for all the possibilities.)
+#### Misc 
+- Check the `--help` for all the possibilities.
 - Simulation results, including scores and move histories can be saved to a CSV file:
 `./ipd-simulator --verbose --iterations 100 --strategy1 Random --strategy2 TitForTat --raw-scores-folder <SOME_FOLDER>`
 
-## Roadmap
+## 4.- Roadmap
 
 -   [x] Implement initial version that can perform the simulation with 2 given strategies. This version includes a minimal set of strategies.
 -   [x] Save simulation results as CSV files.
--   [ ] Add pre-built executables to this README (and spare some users from having to build the project).
+-   [X] Add pre-built executables to this README (and spare some users from having to build the project).
 -   [ ] Make a better/smarter registration of the strategies.
 -   [ ] List all strategies with a command line option (and also provide a description for each strategy)
 -   [ ] Implement all remaining known strategies (e.g., Pavlov, Grim Trigger variants, etc.).
 -   [ ] Implement an "all against all" tournament option.
 -   [ ] Run the "all against all" simulations concurrently (multi-threaded).
 
-## Acknowledgments
+## 5.- Acknowledgments
 
 *   **AI Assistants** (Google AI Studio, ChatGPT, DeepSeek, GitHub Copilot)
 *   **Inspiration:**
