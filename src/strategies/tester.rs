@@ -51,7 +51,7 @@ impl fmt::Display for TesterStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Tester",
-        aliases: &["test", "tester"],
+        aliases: &["test"],
         description: "A strategy that tests the opponent's response and then cooperates or defects based on their behavior.",
         constructor: || Box::new(TesterStrategy::new()),
     }

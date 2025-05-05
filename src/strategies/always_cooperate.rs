@@ -19,7 +19,7 @@ impl fmt::Display for AlwaysCooperateStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Always Cooperate",
-        aliases: &["cooperate", "allc"],
+        aliases: &["alwayscooperate", "cooperate", "allc"],
         description: "A strategy that always cooperates.",
         constructor: || Box::new(AlwaysCooperateStrategy),
     }

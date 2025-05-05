@@ -42,7 +42,7 @@ impl fmt::Display for GradualStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Gradual",
-        aliases: &["gradual", "grad"],
+        aliases: &["grad"],
         description: "A strategy that retaliates gradually based on the opponent's defections.",
         constructor: || Box::new(GradualStrategy::new()),
     }

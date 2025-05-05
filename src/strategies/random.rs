@@ -24,7 +24,7 @@ impl fmt::Display for RandomStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Random",
-        aliases: &[],
+        aliases: &["rand"],
         description: "Randomly chooses between cooperating and defecting.",
         constructor: || Box::new(RandomStrategy),
     }

@@ -19,7 +19,7 @@ impl fmt::Display for AlwaysDefectStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Always Defect",
-        aliases: &["defect", "alld"],
+        aliases: &["alwaysdefect", "defect", "alld"],
         description: "A strategy that always defects.",
         constructor: || Box::new(AlwaysDefectStrategy),
     }

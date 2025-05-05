@@ -23,7 +23,7 @@ impl fmt::Display for TitForTatStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Tit for Tat",
-        aliases: &["tft"],
+        aliases: &["titfortat", "tft"],
         description: "A strategy that mimics the opponent's last move.",
         constructor: || Box::new(TitForTatStrategy),
     }

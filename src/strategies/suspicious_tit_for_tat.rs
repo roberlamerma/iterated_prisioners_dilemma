@@ -23,7 +23,7 @@ impl fmt::Display for SuspiciousTitForTatStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Suspicious Tit for Tat",
-        aliases: &["stft"],
+        aliases: &["suspicioustitfortat", "stft"],
         description: "A strategy that starts with Defect and then mimics the opponent's last move.",
         constructor: || Box::new(SuspiciousTitForTatStrategy),
     }
