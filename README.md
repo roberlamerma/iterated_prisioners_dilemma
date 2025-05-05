@@ -16,7 +16,7 @@ This project is a personal exploration driven by two main goals:
 *   **std** Rust's superb standard library, used for everything else!
 
 ## 3.- Getting Started
-* If you just want to play with the simulator, download the [latest version](https://github.com/roberlamerma/iterated_prisioners_dilemma/releases/tag/v0.1.0), unzip it and jump to the [3.2.- Usage](https://github.com/roberlamerma/iterated_prisioners_dilemma?tab=readme-ov-file#32--usage) section.
+* If you just want to play with the simulator, download the [latest version](https://github.com/roberlamerma/iterated_prisioners_dilemma/releases/tag/v0.2.0), unzip it and jump to the [3.2.- Usage](https://github.com/roberlamerma/iterated_prisioners_dilemma?tab=readme-ov-file#32--usage) section.
 * On the other hand, if you want to build the project yourself, keep reading...
 
 ### 3.1.- Build it
@@ -82,8 +82,8 @@ Tester
 -   [x] Implement initial version that can perform the simulation with 2 given strategies. This version includes a minimal set of strategies.
 -   [x] Save simulation results as CSV files.
 -   [X] Add pre-built executables to this README (and spare some users from having to build the project).
--   [ ] Make a better/smarter registration of the strategies.
--   [ ] List all strategies with a command line option (and also provide a description for each strategy)
+-   [X] Make a better/smarter registration of the strategies.
+-   [X] List all strategies with a command line option (and also provide a description for each strategy)
 -   [ ] Implement all remaining known strategies (e.g., Pavlov, Grim Trigger variants, etc.).
 -   [ ] Implement an "all against all" tournament option.
 -   [ ] Run the "all against all" simulations concurrently (multi-threaded).
