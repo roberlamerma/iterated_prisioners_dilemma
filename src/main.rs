@@ -1,15 +1,5 @@
+use iterated_prisoners_dilemma_lib::strategies::create_strategy_by_name;
 use iterated_prisoners_dilemma_lib::{Move, Strategy, calculate_payoffs};
-use iterated_prisoners_dilemma_lib::strategies::{
-    always_cooperate::AlwaysCooperateStrategy, 
-    always_defect::AlwaysDefectStrategy,
-    random::RandomStrategy, 
-    tit_for_tat::TitForTatStrategy, 
-    tit_for_two_tats::TitForTwoTatsStrategy,
-    suspicious_tit_for_tat::SuspiciousTitForTatStrategy,
-    gradual::GradualStrategy,
-    tester::TesterStrategy
-};
-//use iterated_prisoners_dilemma_lib:: //strategies::{create_strategy_by_name, list_available_strategies};
 
 use clap::Parser;
 use std::fs::{create_dir_all, File};
@@ -23,19 +13,23 @@ use chrono::Local;
 #[command(author, version, about, long_about = "Simulates the Iterated Prisoner's Dilemma between two strategies.")]
 struct Args {
     #[arg(long, help = "Number of iterations to run for the simulation")]
-    iterations: u32,
+    iterations: Option<u32>,
 
     #[arg(long, help = "Name of the first strategy (e.g., 'Random' or 'Tit for Tat')")]
-    strategy1: String,
+    strategy1: Option<String>,
 
     #[arg(long, help = "Name of the second strategy (e.g., 'Random' or 'Tit for Tat')")]
-    strategy2: String,
+    strategy2: Option<String>,
 
     #[arg(long, help = "Folder to store the simulation results per iteration in CSV format. If not provided, no CSV is created")]
-    raw_scores_folder: Option<String>,
+    raw_scores_folder: Option<String>,  
 
-    #[arg(long, help = "Verbose (console) simulation. Notice that this will increase the total sim time.")]
-    verbose: bool
+    #[arg(short, long, help = "Verbose (console) simulation. Notice that this will increase the total sim time.")]
+    verbose: bool,
+
+    #[arg(short, long, help = "Lists all available strategies.")]
+    list_strategies: bool,
+
 }
 
 fn determine_winner(payoff1: i32, payoff2: i32, strategy1: &dyn Strategy, strategy2: &dyn Strategy) -> String {
@@ -46,46 +40,32 @@ fn determine_winner(payoff1: i32, payoff2: i32, strategy1: &dyn Strategy, strate
     }
 }
 
-fn create_strategy(name: &str) -> Result<Box<dyn Strategy>, String> {
-    match name.to_lowercase().as_str() {
-        "random" => Ok(Box::new(RandomStrategy)),
-        "titfortat" => Ok(Box::new(TitForTatStrategy)),
-        "tit for tat" => Ok(Box::new(TitForTatStrategy)),
-        "tft" => Ok(Box::new(TitForTatStrategy)),
-        "suspicioustitfortat" => Ok(Box::new(SuspiciousTitForTatStrategy)),
-        "suspicious tit for tat" => Ok(Box::new(SuspiciousTitForTatStrategy)),
-        "stft" => Ok(Box::new(SuspiciousTitForTatStrategy)),
-        "titfortwotats" => Ok(Box::new(TitForTwoTatsStrategy)),
-        "titfor2tats" => Ok(Box::new(TitForTwoTatsStrategy)),
-        "tit for two tats" => Ok(Box::new(TitForTwoTatsStrategy)),
-        "tit for 2 tats" => Ok(Box::new(TitForTwoTatsStrategy)),
-        "tf2ts" => Ok(Box::new(TitForTwoTatsStrategy)),
-        "gradual" => Ok(Box::new(GradualStrategy::new())),
-        "always defect" => Ok(Box::new(AlwaysDefectStrategy)),
-        "alwaysdefect" => Ok(Box::new(AlwaysDefectStrategy)),
-        "alld" => Ok(Box::new(AlwaysDefectStrategy)),
-        "always cooperate" => Ok(Box::new(AlwaysCooperateStrategy)),
-        "alwayscooperate" => Ok(Box::new(AlwaysCooperateStrategy)),
-        "allc" => Ok(Box::new(AlwaysCooperateStrategy)),
-        "tester" => Ok(Box::new(TesterStrategy::new())),
-        _ => Err(format!("Unknown strategy: {}", name)),
-    }
-}
-
 fn main() -> Result<(), String> {
     let args = Args::parse();
 
-    if args.iterations == 0 {
+    if args.list_strategies {
+        println!("Available strategies: - Name: Description (Aliases)");
+        println!("--------------------------------------------------");
+        for strategy_info in inventory::iter::<iterated_prisoners_dilemma_lib::strategies::StrategyInfo> {
+            println!("- {}", strategy_info);
+        }
+        return Ok(());
+    }
+
+    if args.iterations == Some(0) {
         return Err("Iterations should be > 0".to_string());
     }
 
     let start = Instant::now();
 
-    let mut strategy1 = create_strategy(&args.strategy1)?;
-    let mut strategy2 = create_strategy(&args.strategy2)?;
+    let strategy1_name = args.strategy1.as_deref().ok_or("--strategy1 name is required")?;
+    let strategy2_name = args.strategy2.as_deref().ok_or("--strategy2 name is required")?;
+    let mut strategy1 = create_strategy_by_name(strategy1_name)?;
+    let mut strategy2 = create_strategy_by_name(strategy2_name)?;
 
-    let mut history1: Vec<Move> = Vec::with_capacity(args.iterations as usize);
-    let mut history2: Vec<Move> = Vec::with_capacity(args.iterations as usize);
+    let iterations = args.iterations.ok_or("Iterations are required (and should be > 0)")? as usize;
+    let mut history1: Vec<Move> = Vec::with_capacity(iterations);
+    let mut history2: Vec<Move> = Vec::with_capacity(iterations);
 
     let mut total1 = 0;
     let mut total2 = 0;
@@ -115,7 +95,7 @@ fn main() -> Result<(), String> {
         None => None, // No folder provided, so no file
     };
 
-    for iteration in 1..=args.iterations {
+    for iteration in 1..=iterations {
         let move1 = strategy1.next_move(&history1, &history2);
         let move2 = strategy2.next_move(&history2, &history1);
 
@@ -158,7 +138,7 @@ fn main() -> Result<(), String> {
 
     let duration = start.elapsed();
         println!("\nSimulation time: {:.2?}", duration);
-        println!("Iterations: {}", args.iterations);
+        println!("Iterations: {}", iterations);
         println!("Strategy 1: {}", strategy1.to_string());
         println!("Strategy 2: {}", strategy2.to_string());
         println!("Strategy 1 cumulative score: {}", total1);

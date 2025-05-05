@@ -1,4 +1,5 @@
 use crate::{Move, Strategy};
+use crate::strategies::StrategyInfo;
 use std::fmt;
 
 pub struct TitForTwoTatsStrategy;
@@ -19,5 +20,14 @@ impl Strategy for TitForTwoTatsStrategy {
 impl fmt::Display for TitForTwoTatsStrategy {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Tit for 2 Tats")
+    }
+}
+
+inventory::submit! {
+    StrategyInfo {
+        name: "Tit for Two Tats",
+        aliases: &["tf2t", "tftt"],
+        description: "Cooperates unless the opponent has defected twice in the last two rounds.",
+        constructor: || Box::new(TitForTwoTatsStrategy),
     }
 }

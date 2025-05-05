@@ -1,4 +1,5 @@
 use crate::{Move, Strategy};
+use crate::strategies::StrategyInfo;
 use std::fmt;
 
 pub struct GradualStrategy {
@@ -35,5 +36,14 @@ impl Strategy for GradualStrategy {
 impl fmt::Display for GradualStrategy {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Gradual")
+    }
+}
+
+inventory::submit! {
+    StrategyInfo {
+        name: "Gradual",
+        aliases: &["gradual", "grad"],
+        description: "A strategy that retaliates gradually based on the opponent's defections.",
+        constructor: || Box::new(GradualStrategy::new()),
     }
 }

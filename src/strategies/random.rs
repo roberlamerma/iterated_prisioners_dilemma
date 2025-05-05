@@ -1,4 +1,5 @@
 use crate::{Move, Strategy};
+use crate::strategies::StrategyInfo;
 use rand::Rng;
 use std::fmt;
 
@@ -17,5 +18,14 @@ impl Strategy for RandomStrategy {
 impl fmt::Display for RandomStrategy {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Random")
+    }
+}
+
+inventory::submit! {
+    StrategyInfo {
+        name: "Random",
+        aliases: &[],
+        description: "Randomly chooses between cooperating and defecting.",
+        constructor: || Box::new(RandomStrategy),
     }
 }

@@ -1,4 +1,5 @@
 use crate::{Move, Strategy};
+use crate::strategies::StrategyInfo;
 use std::fmt;
 
 use super::tit_for_tat::TitForTatStrategy;
@@ -44,5 +45,14 @@ impl Strategy for TesterStrategy {
 impl fmt::Display for TesterStrategy {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Tester")
+    }
+}
+
+inventory::submit! {
+    StrategyInfo {
+        name: "Tester",
+        aliases: &["test", "tester"],
+        description: "A strategy that tests the opponent's response and then cooperates or defects based on their behavior.",
+        constructor: || Box::new(TesterStrategy::new()),
     }
 }
