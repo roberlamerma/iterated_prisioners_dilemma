@@ -57,19 +57,8 @@ You basically need to provide the program with 2 competing strategies (`--strate
 
 #### List all available strategies
 
-As of Today, the easiest way to do this is to check the `create_strategy` function, in the `main.rs` file.
-
-*(Note: I'm planning to add a command line option for this. It will also provide a short description for each strategy)*
-
-```
-Random
-TitForTat
-SuspiciousTitForTat
-TitForTwoTats
-Gradual
-AlwaysDefect
-AlwaysCooperate
-Tester
+```bash
+./ipd-simulator --list-strategies
 ```
 
 #### Misc 
