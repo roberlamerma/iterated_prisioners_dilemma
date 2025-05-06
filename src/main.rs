@@ -46,6 +46,7 @@ fn main() -> Result<(), String> {
     if args.list_strategies {
         println!("Available strategies: - Name: Description (Aliases)");
         println!("--------------------------------------------------");
+        //println!("{:?}", list_available_strategies());
         for strategy_info in inventory::iter::<iterated_prisoners_dilemma_lib::strategies::StrategyInfo> {
             println!("- {}", strategy_info);
         }
@@ -79,7 +80,7 @@ fn main() -> Result<(), String> {
             let filename = format!(
                 "{}_Iterated-Prisioners-Dilemma-Simulation_({} vs {}).csv",
                 datetime,
-                strategy1.to_string(), // Note: strategy names needed here
+                strategy1.to_string(),
                 strategy2.to_string()
             );
             let path = Path::new(folder).join(filename);
