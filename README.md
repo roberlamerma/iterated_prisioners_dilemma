@@ -16,7 +16,7 @@ This project is a personal exploration driven by two main goals:
 *   **std** Rust's superb standard library, used for everything else!
 
 ## 3.- Getting Started
-* If you just want to play with the simulator, download the [latest version](https://github.com/roberlamerma/iterated_prisioners_dilemma/releases/tag/v0.3.0), unzip it and jump to the [3.2.- Usage](https://github.com/roberlamerma/iterated_prisioners_dilemma?tab=readme-ov-file#32--usage) section.
+* If you just want to play with the simulator, download the [latest version](https://github.com/roberlamerma/iterated_prisioners_dilemma/releases/tag/v0.4.0), unzip it and jump to the [3.2.- Usage](https://github.com/roberlamerma/iterated_prisioners_dilemma?tab=readme-ov-file#32--usage) section.
 * On the other hand, if you want to build the project yourself, keep reading...
 
 ### 3.1.- Build it
