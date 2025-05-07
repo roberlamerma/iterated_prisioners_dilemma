@@ -52,11 +52,11 @@ Unpredictable; generally performs poorly.
 Cooperates if the opponent has cooperated more than half the time.  
 Encourages long-term cooperation but is not strict.
 
-### Firm Majority
+### [X] Firm Majority
 Defects unless the opponent cooperates more than 75% of the time.  
 Stricter threshold for cooperation.
 
-### Stochastic Tit for Tat
+### [X] Stochastic Tit for Tat
 Like TFT, but sometimes defects even after cooperation, with some probability.  
 Used to test robustness against random noise.
 

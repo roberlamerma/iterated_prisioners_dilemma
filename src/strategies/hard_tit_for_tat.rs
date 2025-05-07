@@ -23,7 +23,7 @@ impl fmt::Display for HardTitForTatStrategy {
 inventory::submit! {
     StrategyInfo {
         name: "Hard Tit for Tat",
-        aliases: &["hardtitfortat", "htft"],
+        aliases: &["hardtitfortat", "h_tft"],
         description: "A strategy that mimics the opponent's last move. It starts defecting though.",
         constructor: || Box::new(HardTitForTatStrategy),
     }

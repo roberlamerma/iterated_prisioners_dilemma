@@ -16,6 +16,8 @@ pub mod win_stay_lose_shift_axelrod;
 pub mod grim_trigger;
 pub mod hard_tit_for_tat;
 pub mod soft_majority;
+pub mod firm_majority;
+pub mod stochastic_tit_for_tat;
 
 // Alias for the strategy constructor function
 // Must return a Box<dyn Strategy>
