@@ -64,7 +64,7 @@ Used to test robustness against random noise.
 
 ## 🧠 Adaptive or Complex Strategies
 
-### Looker Up
+### [X] Looker Up
 Makes decisions based on a lookup table of the last few moves (yours and the opponent’s).  
 Capable of intricate behavior depending on implementation.
 
