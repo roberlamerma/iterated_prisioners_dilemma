@@ -28,11 +28,11 @@ Adaptable and can outperform TFT in some settings.
 Always defects, aiming for maximum gain.  
 Short-term gains, but performs poorly in the long run.
 
-### Grim Trigger
+### [X] Grim Trigger
 Cooperates until the opponent defects once, then defects forever.  
 Very unforgiving; effective as a deterrent.
 
-### Hard Tit for Tat
+### [X] Hard Tit for Tat
 Like TFT, but starts by defecting.  
 More aggressive than standard TFT.
 
@@ -48,7 +48,7 @@ Tests the opponent’s response to defection.
 Cooperates or defects with equal probability.  
 Unpredictable; generally performs poorly.
 
-### Soft Majority
+### [X] Soft Majority
 Cooperates if the opponent has cooperated more than half the time.  
 Encourages long-term cooperation but is not strict.
 

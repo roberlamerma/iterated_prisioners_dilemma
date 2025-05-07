@@ -13,6 +13,9 @@ pub mod tester;
 pub mod generous_tit_for_tat;
 pub mod win_stay_lose_shift;
 pub mod win_stay_lose_shift_axelrod;
+pub mod grim_trigger;
+pub mod hard_tit_for_tat;
+pub mod soft_majority;
 
 // Alias for the strategy constructor function
 // Must return a Box<dyn Strategy>
