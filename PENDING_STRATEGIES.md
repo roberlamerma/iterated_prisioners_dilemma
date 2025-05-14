@@ -72,11 +72,7 @@ Capable of intricate behavior depending on implementation.
 Uses internal states to track history and respond conditionally.  
 Allows nuanced memory-based strategies.
 
-### Nice Tit for Tat
-Like TFT, but never retaliates after defection.  
-Extremely forgiving; often exploited.
-
-### Forgiving
+### [X] Forgiving
 Defects after the opponent defects, but returns to cooperation after a few rounds.  
 Encourages reconciliation.
 

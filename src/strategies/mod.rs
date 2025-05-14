@@ -19,6 +19,7 @@ pub mod soft_majority;
 pub mod firm_majority;
 pub mod stochastic_tit_for_tat;
 pub mod looker_up;
+pub mod forgiving;
 
 // Alias for the strategy constructor function
 // Must return a Box<dyn Strategy>
