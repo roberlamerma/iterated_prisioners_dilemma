@@ -27,5 +27,6 @@ inventory::submit! {
         aliases: &["rand"],
         description: "Randomly chooses between cooperating and defecting.",
         constructor: || Box::new(RandomStrategy),
+        supports_parameters: false,
     }
 }

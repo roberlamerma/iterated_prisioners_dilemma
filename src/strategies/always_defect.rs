@@ -22,5 +22,6 @@ inventory::submit! {
         aliases: &["alwaysdefect", "defect", "alld"],
         description: "A strategy that always defects.",
         constructor: || Box::new(AlwaysDefectStrategy),
+        supports_parameters: false,
     }
 }

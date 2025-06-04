@@ -38,5 +38,6 @@ inventory::submit! {
         aliases: &["grim", "grimtrigger"],
         description: "Cooperates until the opponent defects once, then always defects.",
         constructor: || Box::new(GrimTriggerStrategy::new()),
+        supports_parameters: false,
     }
 }

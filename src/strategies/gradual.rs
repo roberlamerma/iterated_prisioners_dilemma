@@ -45,5 +45,6 @@ inventory::submit! {
         aliases: &["grad"],
         description: "A strategy that retaliates gradually based on the opponent's defections.",
         constructor: || Box::new(GradualStrategy::new()),
+        supports_parameters: false,
     }
 }

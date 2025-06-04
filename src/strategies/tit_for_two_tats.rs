@@ -29,5 +29,6 @@ inventory::submit! {
         aliases: &["titfortwotats", "tf2t", "tftt"],
         description: "Cooperates unless the opponent has defected twice in the last two rounds.",
         constructor: || Box::new(TitForTwoTatsStrategy),
+        supports_parameters: false,
     }
 }

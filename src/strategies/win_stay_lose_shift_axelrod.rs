@@ -36,5 +36,6 @@ inventory::submit! {
         aliases: &["winstayloseshiftoriginal", "pavlovoriginal", "wslso"],
         description: "If the last round's payoff was high (i.e. mutual cooperation or sucker's reward), repeat the same move; otherwise, switch.",
         constructor: || Box::new(WinStayLoseShiftStrategyAxelrod),
+        supports_parameters: false,
     }
 } 

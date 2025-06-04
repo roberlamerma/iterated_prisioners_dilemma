@@ -7,7 +7,7 @@ use std::io::Write;
 use std::path::Path;
 use std::time::Instant;
 use chrono::Local;
-
+use serde_json;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = "Simulates the Iterated Prisoner's Dilemma between two strategies.")]
@@ -21,6 +21,12 @@ struct Args {
     #[arg(long, help = "Name of the second strategy (e.g., 'Random' or 'Tit for Tat')")]
     strategy2: Option<String>,
 
+    #[arg(long, help = "JSON file with the custom parameters for the first strategy")]
+    strategy1_params: Option<String>,
+
+    #[arg(long, help = "JSON file with the custom parameters for the second strategy")]
+    strategy2_params: Option<String>,
+
     #[arg(long, help = "Folder to store the simulation results per iteration in CSV format. If not provided, no CSV is created")]
     raw_scores_folder: Option<String>,  
 
@@ -29,7 +35,6 @@ struct Args {
 
     #[arg(short, long, help = "Lists all available strategies.")]
     list_strategies: bool,
-
 }
 
 fn determine_winner(payoff1: i32, payoff2: i32, strategy1: &dyn Strategy, strategy2: &dyn Strategy) -> String {
@@ -38,6 +43,14 @@ fn determine_winner(payoff1: i32, payoff2: i32, strategy1: &dyn Strategy, strate
         std::cmp::Ordering::Less    => strategy2.to_string(),
         std::cmp::Ordering::Equal   => "Tie".to_string(),
     }
+}
+
+fn load_parameters(file_path: &str) -> Result<serde_json::Value, String> {
+    let contents = std::fs::read_to_string(file_path)
+        .map_err(|e| format!("Failed to read parameters file: {}", e))?;
+    
+    serde_json::from_str(&contents)
+        .map_err(|e| format!("Failed to parse parameters JSON: {}", e))
 }
 
 fn main() -> Result<(), String> {
@@ -61,8 +74,20 @@ fn main() -> Result<(), String> {
 
     let strategy1_name = args.strategy1.as_deref().ok_or("--strategy1 name is required")?;
     let strategy2_name = args.strategy2.as_deref().ok_or("--strategy2 name is required")?;
-    let mut strategy1 = create_strategy_by_name(strategy1_name)?;
-    let mut strategy2 = create_strategy_by_name(strategy2_name)?;
+
+    let strategy1_params = if let Some(params_file) = args.strategy1_params {
+        Some(load_parameters(&params_file)?)
+    } else {
+        None
+    };
+    let strategy2_params = if let Some(params_file) = args.strategy2_params {
+        Some(load_parameters(&params_file)?)
+    } else {
+        None
+    };
+
+    let mut strategy1 = create_strategy_by_name(strategy1_name, strategy1_params)?;
+    let mut strategy2 = create_strategy_by_name(strategy2_name, strategy2_params)?;
 
     let iterations = args.iterations.ok_or("Iterations are required (and should be > 0)")? as usize;
     let mut history1: Vec<Move> = Vec::with_capacity(iterations);

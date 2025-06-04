@@ -26,5 +26,6 @@ inventory::submit! {
         aliases: &["suspicioustitfortat", "sus_tft"],
         description: "A strategy that starts with Defect and then mimics the opponent's last move.",
         constructor: || Box::new(SuspiciousTitForTatStrategy),
+        supports_parameters: false,
     }
 }

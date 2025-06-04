@@ -54,5 +54,6 @@ inventory::submit! {
         aliases: &["test"],
         description: "A strategy that tests the opponent's response and then cooperates or defects based on their behavior.",
         constructor: || Box::new(TesterStrategy::new()),
+        supports_parameters: false,
     }
 }

@@ -29,5 +29,6 @@ inventory::submit! {
         aliases: &["firmmajority", "firm"],
         description: "Defects unless the opponent has cooperated more than 75% of the time.",
         constructor: || Box::new(FirmMajorityStrategy),
+        supports_parameters: false,
     }
 }

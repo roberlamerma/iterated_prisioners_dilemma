@@ -105,5 +105,6 @@ inventory::submit! {
         aliases: &["lookerup"],
         description: "Makes decisions based on the last N moves of both players using a predefined lookup table.",
         constructor: || Box::new(LookerUpStrategy::new()),
+        supports_parameters: false,
     }
 }

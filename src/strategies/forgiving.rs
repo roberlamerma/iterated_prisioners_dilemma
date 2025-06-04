@@ -40,6 +40,18 @@ impl Strategy for ForgivingStrategy {
             }
         }
     }
+
+    fn set_parameters(&mut self, params: serde_json::Value) -> Result<(), String> {
+        if let Some(threshold) = params.get("forgiveness_threshold") {
+            if let Some(threshold) = threshold.as_u64() {
+                if threshold > 0 && threshold <= u8::MAX as u64 {
+                    self.forgiveness_threshold = threshold as u8;
+                    return Ok(());
+                }
+            }
+        }
+        Err("Invalid parameters. Expected 'forgiveness_threshold' as a positive integer between 1 and 255".to_string())
+    }
 }
 
 impl fmt::Display for ForgivingStrategy {
@@ -57,6 +69,7 @@ inventory::submit! {
         name: "Forgiving",
         aliases: &["forgives", "forgive"],
         description: "Defects after a defection, but returns to cooperation after a set number of rounds. Encourages reconciliation.",
-        constructor: || Box::new(ForgivingStrategy::new(3)), // Configure here the forgiveness threshold
+        constructor: || Box::new(ForgivingStrategy::new(3)), // Default forgiveness threshold of 3 rounds
+        supports_parameters: true,
     }
 }

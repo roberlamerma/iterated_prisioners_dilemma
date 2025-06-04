@@ -1,6 +1,7 @@
 pub mod strategies;
 
 use std::fmt;
+use serde_json;
 
 #[derive(Clone, Copy, PartialEq, Debug, Hash, Eq)]
 pub enum Move {
@@ -9,7 +10,9 @@ pub enum Move {
 }
 
 // Defines the interface for any strategy
-pub trait Strategy: fmt::Display {
+//pub trait Strategy: fmt::Display {
+pub trait Strategy: fmt::Display + Send + Sync {
+
     // next move based on the historical moves.
     // `own_history` contains the all the strategy's past moves (from oldest to newest)
     // `opponent_history` contains the oponent's past moves (from oldest to newest)
@@ -17,6 +20,12 @@ pub trait Strategy: fmt::Display {
 
     // Reset needed?
     //fn reset(&mut self);
+
+    // Add a method to set parameters
+    fn set_parameters(&mut self, params: serde_json::Value) -> Result<(), String> {
+        // Default implementation does nothing
+        Ok(())
+    }
 }
 
 pub const REWARD: i32 = 3;

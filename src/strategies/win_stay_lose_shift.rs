@@ -40,5 +40,6 @@ inventory::submit! {
         aliases: &["winstayloseshift", "pavlov", "wsls"],
         description: "A strategy that repeats its last move if both players made the same choice, otherwise switches to the opposite move.",
         constructor: || Box::new(WinStayLoseShiftStrategy),
+        supports_parameters: false,
     }
 } 

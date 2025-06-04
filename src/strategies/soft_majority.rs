@@ -29,5 +29,6 @@ inventory::submit! {
         aliases: &["softmajority", "soft"],
         description: "Cooperates if the opponent has cooperated more than half the time.",
         constructor: || Box::new(SoftMajorityStrategy),
+        supports_parameters: false,
     }
 }

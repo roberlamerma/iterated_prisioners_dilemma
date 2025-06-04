@@ -26,5 +26,6 @@ inventory::submit! {
         aliases: &["titfortat", "tft"],
         description: "A strategy that mimics the opponent's last move.",
         constructor: || Box::new(TitForTatStrategy),
+        supports_parameters: false,
     }
 }

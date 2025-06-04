@@ -22,5 +22,6 @@ inventory::submit! {
         aliases: &["alwayscooperate", "cooperate", "allc"],
         description: "A strategy that always cooperates.",
         constructor: || Box::new(AlwaysCooperateStrategy),
+        supports_parameters: false,
     }
 }
