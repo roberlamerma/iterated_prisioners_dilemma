@@ -22,7 +22,7 @@ pub trait Strategy: fmt::Display + Send + Sync {
     //fn reset(&mut self);
 
     // Add a method to set parameters
-    fn set_parameters(&mut self, params: serde_json::Value) -> Result<(), String> {
+    fn set_parameters(&mut self, _params: serde_json::Value) -> Result<(), String> {
         // Default implementation does nothing
         Ok(())
     }

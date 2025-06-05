@@ -61,6 +61,29 @@ You basically need to provide the program with 2 competing strategies (`--strate
 ./ipd-simulator --list-strategies
 ```
 
+#### Pass custom parameters to specific strategies
+
+Pass the parameters for each strategy using the `--strategy1-params` and `--strategy2-params` arguments:
+
+```bash
+./ipd-simulator --iterations 100 --strategy1 cycler --strategy1-params src/strategies/parameter_examples/cycler_params.json --strategy2 customrandom --strategy2-params src/strategies/parameter_examples/custom_random_params.json
+```
+Used params above:
+```json
+{
+    "sequence": "CDCCD"
+}
+```
+```json
+{
+    "cooperate_probability": 0.7
+}
+```
+
+**Note:** not all strategies allow parameters. You can assess the ones that do using the `--list-strategies` option.
+
+**Note2:** you have examples for all strategies/parameters on the `parameter_examples` folder.
+
 #### Misc 
 - Check the `--help` for all the possibilities.
 - Simulation results, including scores and move histories can be saved to a CSV file:
@@ -73,6 +96,7 @@ You basically need to provide the program with 2 competing strategies (`--strate
 -   [X] Add pre-built executables to this README (and spare some users from having to build the project).
 -   [X] Make a better/smarter registration of the strategies.
 -   [X] List all strategies with a command line option (and also provide a description for each strategy)
+-   [X] Allow parametrizable strategies (i.g. "Looker Up")
 -   [ ] Implement all remaining known strategies (e.g., Pavlov, Grim Trigger variants, etc.).
 -   [ ] Implement an "all against all" tournament option.
 -   [ ] Run the "all against all" simulations concurrently (multi-threaded).

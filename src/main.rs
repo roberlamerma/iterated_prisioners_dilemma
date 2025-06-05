@@ -59,9 +59,9 @@ fn main() -> Result<(), String> {
     if args.list_strategies {
         println!("Available strategies: - Name: Description (Aliases)");
         println!("--------------------------------------------------");
-        //println!("{:?}", list_available_strategies());
         for strategy_info in inventory::iter::<iterated_prisoners_dilemma_lib::strategies::StrategyInfo> {
             println!("- {}", strategy_info);
+            println!("");
         }
         return Ok(());
     }

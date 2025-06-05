@@ -21,6 +21,10 @@ pub mod majority;
 pub mod stochastic_tit_for_tat;
 pub mod looker_up;
 pub mod forgiving;
+pub mod reverse_tit_for_tat;
+pub mod custom_random;
+pub mod adaptative_strategy;
+pub mod cycler;
 
 // Alias for the strategy constructor function
 // Must return a Box<dyn Strategy>
