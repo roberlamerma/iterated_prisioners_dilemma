@@ -1,0 +1,9 @@
+{
+    "history_length": 2,
+    "lookup_table": [
+      { "own": ["C", "C"], "opp": ["C", "C"], "move": "C" },
+      { "own": ["C", "C"], "opp": ["C", "D"], "move": "C" },
+      { "own": ["C", "C"], "opp": ["D", "C"], "move": "C" },
+      { "own": ["C", "C"], "opp": ["D", "D"], "move": "D" }
+    ]
+  }

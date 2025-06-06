@@ -1,0 +1,15 @@
+{
+    "history_length": 3,
+    "lookup_table": [
+      { "own": ["C", "C", "C"], "opp": ["C", "C", "C"], "move": "C" },
+      { "own": ["C", "C", "C"], "opp": ["C", "C", "D"], "move": "C" },
+      { "own": ["C", "C", "C"], "opp": ["C", "D", "C"], "move": "C" },
+      { "own": ["C", "C", "C"], "opp": ["C", "D", "D"], "move": "C" },
+
+      
+      { "own": ["C", "C", "C"], "opp": ["D", "C", "C"], "move": "C" },
+      { "own": ["C", "C", "C"], "opp": ["D", "C", "D"], "move": "C" },
+      { "own": ["C", "C", "C"], "opp": ["D", "D", "C"], "move": "C" },
+      { "own": ["C", "C", "C"], "opp": ["D", "D", "D"], "move": "D" }
+    ]
+  }
