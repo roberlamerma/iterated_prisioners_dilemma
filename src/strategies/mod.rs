@@ -8,9 +8,9 @@ pub mod tit_for_two_tats;
 pub mod suspicious_tit_for_tat;
 pub mod always_cooperate;
 pub mod always_defect;
-pub mod gradual;
+pub mod gradual_tit_for_tat;
 pub mod tester;
-pub mod generous_tit_for_tat;
+pub mod configurable_generous_tit_for_tat;
 pub mod win_stay_lose_shift;
 pub mod win_stay_lose_shift_axelrod;
 pub mod grim_trigger;
@@ -22,9 +22,11 @@ pub mod stochastic_tit_for_tat;
 pub mod looker_up;
 pub mod forgiving;
 pub mod reverse_tit_for_tat;
-pub mod custom_random;
+pub mod probability_cooperator;
 pub mod adaptative_strategy;
 pub mod cycler;
+pub mod generous_tit_for_tat;
+pub mod imperfect_tit_for_tat;
 
 // Alias for the strategy constructor function
 // Must return a Box<dyn Strategy>

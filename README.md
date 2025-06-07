@@ -103,6 +103,6 @@ Used params above:
 
 ## 5.- Acknowledgments
 
-*   **AI Assistants** (Google AI Studio, ChatGPT, DeepSeek, GitHub Copilot)
+*   **AI Assistants** (Gemini, ChatGPT, DeepSeek, GitHub Copilot, Cursor)
 *   **Inspiration:**
-    *   This fascinating Veritasium video re-sparked my interest in a somehow dormant topic (Game Theory): [What Game Theory Reveals About Life, The Universe, and Everything](https://www.youtube.com/watch?v=mScpHTIi-kM)
+    *   This fascinating Veritasium video re-ignited my interest in a somehow dormant topic (Game Theory): [What Game Theory Reveals About Life, The Universe, and Everything](https://www.youtube.com/watch?v=mScpHTIi-kM)

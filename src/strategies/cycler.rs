@@ -56,7 +56,7 @@ impl Strategy for CyclerStrategy {
 
 impl fmt::Display for CyclerStrategy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "CyclerStrategy")
+        write!(f, "Cycler")
     }
 }
 

@@ -3,11 +3,11 @@ use crate::strategies::StrategyInfo;
 use rand::Rng;
 use std::fmt;
 
-pub struct CustomRandomStrategy {
+pub struct ProbabilityCooperatorStrategy {
     cooperate_probability: f64,
 }
 
-impl CustomRandomStrategy {
+impl ProbabilityCooperatorStrategy {
     pub fn new() -> Self {
         Self {
             cooperate_probability: 0.5, // Default 50% chance to cooperate
@@ -15,7 +15,7 @@ impl CustomRandomStrategy {
     }
 }
 
-impl Strategy for CustomRandomStrategy {
+impl Strategy for ProbabilityCooperatorStrategy {
     fn next_move(&mut self, _own_history: &[Move], _opponent_history: &[Move]) -> Move {
         if rand::rng().random_bool(self.cooperate_probability) {
             Move::Cooperate
@@ -37,18 +37,18 @@ impl Strategy for CustomRandomStrategy {
     }
 }
 
-impl fmt::Display for CustomRandomStrategy {
+impl fmt::Display for ProbabilityCooperatorStrategy {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Custom Random (cooperate_probability: {})", self.cooperate_probability)
+        write!(f, "Probability Cooperator (cooperate_probability: {})", self.cooperate_probability)
     }
 }
 
 inventory::submit! {
     StrategyInfo {
-        name: "Custom Random",
-        aliases: &["customrandom", "crand"],
-        description: "Returns Cooperate with a configurable probability, otherwise Defect. When the parameter 'cooperate_probability' is set to 50% (0.5), it behaves like the 'Random' strategy.",
-        constructor: || Box::new(CustomRandomStrategy::new()),
+        name: "Probability Cooperator",
+        aliases: &["probabilitycooperator", "prob_coop"],
+        description: "Returns Cooperate with a fixed configurable probability, otherwise Defect. When the parameter 'cooperate_probability' is set to 50% (0.5), it behaves like the 'Random' strategy.",
+        constructor: || Box::new(ProbabilityCooperatorStrategy::new()),
         supports_parameters: true,
     }
 }
