@@ -28,6 +28,7 @@ pub mod cycler;
 pub mod generous_tit_for_tat;
 pub mod imperfect_tit_for_tat;
 pub mod two_tit_for_tats;
+pub mod omega_tit_for_tat;
 
 // Alias for the strategy constructor function
 // Must return a Box<dyn Strategy>

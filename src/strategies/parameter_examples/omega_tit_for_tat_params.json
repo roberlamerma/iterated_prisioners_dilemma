@@ -1,0 +1,4 @@
+{
+    "deadlock_threshold": 8,
+    "randomness_threshold": 8
+}
