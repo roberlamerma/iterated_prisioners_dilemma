@@ -103,6 +103,5 @@ Pass the parameters for each strategy using the `--strategy1-params` and `--stra
 
 ## 5.- Acknowledgments
 
-*   **AI Assistants** (Gemini CLI, GitHub Copilot, Cursor, ChatGPT, DeepSeek)
 *   **Inspiration:**
     *   This fascinating Veritasium video re-ignited my interest in this Game Theory problem: [What Game Theory Reveals About Life, The Universe, and Everything](https://www.youtube.com/watch?v=mScpHTIi-kM)

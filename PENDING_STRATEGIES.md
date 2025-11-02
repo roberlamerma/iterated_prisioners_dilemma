@@ -1,3 +1,5 @@
+# Strategies
+
 ## 🤝 Cooperative Strategies
 
 ### [X] Always Cooperate (All-C)
@@ -76,5 +78,11 @@ Allows nuanced memory-based strategies.
 Defects after the opponent defects, but returns to cooperation after a few rounds.  
 Encourages reconciliation.
 
----
-[Axelrod's Phyton](https://github.com/Axelrod-Python/Axelrod)
+# Links
+
+- [Axelrod's Phyton](https://github.com/Axelrod-Python/Axelrod)
+
+- [Medium article](https://medium.com/@metaform3d/prisoners-dilemma-revisited-bfdaa0e02c80)
+    - [It's code...](https://github.com/metaform3d/prisoners_dilemma/blob/main/PrisonersDilema.swift)
+
+- [Strategies](https://plato.stanford.edu/entries/prisoner-dilemma/strategy-table.html)
