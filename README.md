@@ -16,8 +16,8 @@ This project is a personal exploration driven by two main goals:
 *   **std** Rust's superb standard library, used for everything else!
 
 ## 3.- Getting Started
-* If you just want to play with the simulator, download the [latest version](https://github.com/roberlamerma/iterated_prisioners_dilemma/releases/tag/v0.4.0), unzip it and jump to the [3.2.- Usage](https://github.com/roberlamerma/iterated_prisioners_dilemma?tab=readme-ov-file#32--usage) section.
-* On the other hand, if you want to build the project yourself, keep reading...
+* :fire: If you just want to play with the simulator, download the [latest version](https://github.com/roberlamerma/iterated_prisioners_dilemma/releases/tag/v0.4.0), unzip it and jump to the [3.2.- Usage](https://github.com/roberlamerma/iterated_prisioners_dilemma?tab=readme-ov-file#32--usage) section.
+* 🐢 On the other hand, if you want to build the project yourself, keep reading...
 
 ### 3.1.- Build it
 #### Prerequisites
@@ -68,7 +68,7 @@ Pass the parameters for each strategy using the `--strategy1-params` and `--stra
 ```bash
 ./ipd-simulator --iterations 100 --strategy1 cycler --strategy1-params src/strategies/parameter_examples/cycler_params.json --strategy2 customrandom --strategy2-params src/strategies/parameter_examples/custom_random_params.json
 ```
-Used params above:
+:bulb: The (file) params above are (`cycler_params.json` and `custom_random_params.json` respectively):
 ```json
 {
     "sequence": "CDCCD"
@@ -80,9 +80,9 @@ Used params above:
 }
 ```
 
-**Note:** not all strategies allow parameters. You can assess the ones that do using the `--list-strategies` option.
-
-**Note2:** you have examples for all strategies/parameters on the `parameter_examples` folder.
+**Notes:** 
+1. Not all strategies allow parameters. You can assess the ones that do using the `--list-strategies` option.
+2. You have examples for all strategies that require parameters in the '[parameter_examples](src/strategies/parameter_examples)' folder.
 
 #### Misc 
 - Check the `--help` for all the possibilities.
@@ -103,6 +103,6 @@ Used params above:
 
 ## 5.- Acknowledgments
 
-*   **AI Assistants** (Gemini, ChatGPT, DeepSeek, GitHub Copilot, Cursor)
+*   **AI Assistants** (Gemini CLI, GitHub Copilot, Cursor, ChatGPT, DeepSeek)
 *   **Inspiration:**
-    *   This fascinating Veritasium video re-ignited my interest in a somehow dormant topic (Game Theory): [What Game Theory Reveals About Life, The Universe, and Everything](https://www.youtube.com/watch?v=mScpHTIi-kM)
+    *   This fascinating Veritasium video re-ignited my interest in this Game Theory problem: [What Game Theory Reveals About Life, The Universe, and Everything](https://www.youtube.com/watch?v=mScpHTIi-kM)
