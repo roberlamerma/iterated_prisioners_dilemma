@@ -5,7 +5,7 @@
 This project is a personal exploration driven by two main goals:
 
 *   To delve deeper into the fascinating **Iterated [Prisoner's Dilemma](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma) (IPD)** problem and some related Game Theory concepts such as Nash equilibria.
-*   To learn **Rust** "by doing". **Disclaimer:** I received a lot of help from the AI's mentioned further below. 
+*   To learn **Rust** "by doing". 
 
 ## 2.- Built With
 
