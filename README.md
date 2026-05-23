@@ -84,6 +84,27 @@ Pass the parameters for each strategy using the `--strategy1-params` and `--stra
 1. Not all strategies allow parameters. You can assess the ones that do using the `--list-strategies` option.
 2. You have examples for all strategies that require parameters in the '[parameter_examples](src/strategies/parameter_examples)' folder.
 
+#### Override the payoff values
+
+The four classic Prisoner's Dilemma payoffs can be overridden from the command line. Any subset may be supplied; missing flags fall back to the canonical Axelrod defaults shown below.
+
+| Flag | Meaning | Default |
+| ---- | ------- | ------- |
+| `--temptation` | T — payoff for defecting while the opponent cooperates | 5 |
+| `--reward`     | R — payoff for mutual cooperation                       | 3 |
+| `--punishment` | P — payoff for mutual defection                         | 1 |
+| `--sucker`     | S — payoff for cooperating while the opponent defects   | 0 |
+
+```bash
+./ipd-simulator --iterations 100 --strategy1 TitForTat --strategy2 Random --temptation 6 --reward 4
+```
+
+The supplied values must satisfy both:
+- `SUCKER < PUNISHMENT < REWARD < TEMPTATION` (the defining PD inequality)
+- `2 * REWARD > TEMPTATION + SUCKER` (the iterated-PD inequality — ensures mutual cooperation beats alternating exploitation)
+
+The program exits with an explanatory error if either condition is violated.
+
 #### Misc 
 - Check the `--help` for all the possibilities.
 - Simulation results, including scores and move histories can be saved to a CSV file:

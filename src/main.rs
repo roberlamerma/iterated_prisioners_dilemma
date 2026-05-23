@@ -1,5 +1,5 @@
 use iterated_prisoners_dilemma_lib::strategies::create_strategy_by_name;
-use iterated_prisoners_dilemma_lib::{Move, Strategy, calculate_payoffs};
+use iterated_prisoners_dilemma_lib::{Move, Payoffs, Strategy, calculate_payoffs};
 
 use clap::Parser;
 use std::fs::{create_dir_all, File};
@@ -35,6 +35,18 @@ struct Args {
 
     #[arg(short, long, help = "Lists all available strategies.")]
     list_strategies: bool,
+
+    #[arg(long, allow_negative_numbers = true, help = "Payoff T (temptation: defect vs. cooperate). Default: 5")]
+    temptation: Option<i32>,
+
+    #[arg(long, allow_negative_numbers = true, help = "Payoff R (reward: mutual cooperation). Default: 3")]
+    reward: Option<i32>,
+
+    #[arg(long, allow_negative_numbers = true, help = "Payoff P (punishment: mutual defection). Default: 1")]
+    punishment: Option<i32>,
+
+    #[arg(long, allow_negative_numbers = true, help = "Payoff S (sucker: cooperate vs. defect). Default: 0")]
+    sucker: Option<i32>,
 }
 
 fn determine_winner(payoff1: i32, payoff2: i32, strategy1: &dyn Strategy, strategy2: &dyn Strategy) -> String {
@@ -70,6 +82,15 @@ fn main() -> Result<(), String> {
         return Err("Iterations should be > 0".to_string());
     }
 
+    let default_payoffs = Payoffs::default();
+    let payoffs = Payoffs {
+        temptation: args.temptation.unwrap_or(default_payoffs.temptation),
+        reward:     args.reward.unwrap_or(default_payoffs.reward),
+        punishment: args.punishment.unwrap_or(default_payoffs.punishment),
+        sucker:     args.sucker.unwrap_or(default_payoffs.sucker),
+    };
+    payoffs.validate()?;
+
     let start = Instant::now();
 
     let strategy1_name = args.strategy1.as_deref().ok_or("--strategy1 name is required")?;
@@ -88,6 +109,8 @@ fn main() -> Result<(), String> {
 
     let mut strategy1 = create_strategy_by_name(strategy1_name, strategy1_params)?;
     let mut strategy2 = create_strategy_by_name(strategy2_name, strategy2_params)?;
+    strategy1.set_payoffs(payoffs);
+    strategy2.set_payoffs(payoffs);
 
     let iterations = args.iterations.ok_or("Iterations are required (and should be > 0)")? as usize;
     let mut history1: Vec<Move> = Vec::with_capacity(iterations);
@@ -126,7 +149,7 @@ fn main() -> Result<(), String> {
         let move2 = strategy2.next_move(&history2, &history1);
 
         // Calculate payoffs for this round
-        let (payoff1, payoff2) = calculate_payoffs(move1, move2);
+        let (payoff1, payoff2) = calculate_payoffs(move1, move2, &payoffs);
         total1 += payoff1;
         total2 += payoff2;
 

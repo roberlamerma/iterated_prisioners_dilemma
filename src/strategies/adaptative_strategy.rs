@@ -1,16 +1,22 @@
-use crate::{Move, Strategy, calculate_payoffs};
+use crate::{Move, Payoffs, Strategy, calculate_payoffs};
 use crate::strategies::StrategyInfo;
 use std::fmt;
 
-#[derive(Default)]
 pub struct AdaptiveStrategy {
     initial_sequence: Vec<Move>,
     params_set: bool,
+    payoffs: Payoffs,
+}
+
+impl Default for AdaptiveStrategy {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AdaptiveStrategy {
     pub fn new() -> Self {
-        Self { initial_sequence: Vec::new(), params_set: false }
+        Self { initial_sequence: Vec::new(), params_set: false, payoffs: Payoffs::default() }
     }
 }
 
@@ -32,7 +38,7 @@ impl Strategy for AdaptiveStrategy {
         for (i, &m) in own_history.iter().enumerate() {
             if i >= opponent_history.len() { break; }
             let opp = opponent_history[i];
-            let (my_payoff, _) = calculate_payoffs(m, opp);
+            let (my_payoff, _) = calculate_payoffs(m, opp, &self.payoffs);
             match m {
                 Move::Cooperate => { c_total += my_payoff; c_count += 1; },
                 Move::Defect => { d_total += my_payoff; d_count += 1; },
@@ -60,6 +66,10 @@ impl Strategy for AdaptiveStrategy {
             }
         }
         Ok(())
+    }
+
+    fn set_payoffs(&mut self, payoffs: Payoffs) {
+        self.payoffs = payoffs;
     }
 }
 

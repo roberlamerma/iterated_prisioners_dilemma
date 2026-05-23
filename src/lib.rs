@@ -9,6 +9,41 @@ pub enum Move {
     Defect
 }
 
+#[derive(Clone, Copy, Debug)]
+pub struct Payoffs {
+    pub temptation: i32, // T: payoff for defecting while the opponent cooperates
+    pub reward:     i32, // R: payoff for mutual cooperation
+    pub punishment: i32, // P: payoff for mutual defection
+    pub sucker:     i32, // S: payoff for cooperating while the opponent defects
+}
+
+impl Default for Payoffs {
+    fn default() -> Self {
+        Self { temptation: 5, reward: 3, punishment: 1, sucker: 0 }
+    }
+}
+
+impl Payoffs {
+    pub fn validate(&self) -> Result<(), String> {
+        if !(self.sucker < self.punishment
+            && self.punishment < self.reward
+            && self.reward < self.temptation)
+        {
+            return Err(format!(
+                "Invalid payoffs: require SUCKER ({}) < PUNISHMENT ({}) < REWARD ({}) < TEMPTATION ({})",
+                self.sucker, self.punishment, self.reward, self.temptation
+            ));
+        }
+        if 2 * self.reward <= self.temptation + self.sucker {
+            return Err(format!(
+                "Invalid payoffs for the iterated PD: require 2*REWARD ({}) > TEMPTATION ({}) + SUCKER ({}) = {}",
+                2 * self.reward, self.temptation, self.sucker, self.temptation + self.sucker
+            ));
+        }
+        Ok(())
+    }
+}
+
 // Defines the interface for any strategy
 //pub trait Strategy: fmt::Display {
 pub trait Strategy: fmt::Display + Send + Sync {
@@ -26,18 +61,19 @@ pub trait Strategy: fmt::Display + Send + Sync {
         // Default implementation does nothing
         Ok(())
     }
+
+    // Allow strategies that depend on payoff values (e.g. Generous Tit-for-Tat,
+    // Adaptive) to receive the active Payoffs before the simulation starts.
+    fn set_payoffs(&mut self, _payoffs: Payoffs) {
+        // Default implementation does nothing
+    }
 }
 
-pub const REWARD: i32 = 3;
-pub const TEMPTATION: i32 = 5;
-pub const SUCKER: i32 = 0;
-pub const PUNISHMENT: i32 = 1;
-
-pub fn calculate_payoffs(move1: Move, move2: Move) -> (i32, i32) {
+pub fn calculate_payoffs(move1: Move, move2: Move, p: &Payoffs) -> (i32, i32) {
     match (move1, move2) {
-        (Move::Cooperate, Move::Cooperate) => (REWARD,     REWARD),     // Mutual cooperation
-        (Move::Cooperate, Move::Defect)    => (SUCKER,     TEMPTATION), // Sucker's payoff / Temptation
-        (Move::Defect,    Move::Cooperate) => (TEMPTATION, SUCKER),     // Temptation / Sucker's payoff
-        (Move::Defect,    Move::Defect)    => (PUNISHMENT, PUNISHMENT), // Mutual defection
+        (Move::Cooperate, Move::Cooperate) => (p.reward,     p.reward),     // Mutual cooperation
+        (Move::Cooperate, Move::Defect)    => (p.sucker,     p.temptation), // Sucker's payoff / Temptation
+        (Move::Defect,    Move::Cooperate) => (p.temptation, p.sucker),     // Temptation / Sucker's payoff
+        (Move::Defect,    Move::Defect)    => (p.punishment, p.punishment), // Mutual defection
     }
 }
